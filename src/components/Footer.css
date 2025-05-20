@@ -1,0 +1,55 @@
+.footer {
+    display: flex;
+    justify-content: space-around;
+    background: #f3f3f3;
+    padding: 2rem 1rem;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  
+  .footer-column h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-column p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+  }
+  
+  .newsletter {
+    display: flex;
+    margin-top: 0.5rem;
+  }
+  
+  .newsletter input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 20px 0 0 20px;
+  }
+  
+  .newsletter button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: #444;
+    color: white;
+    border-radius: 0 20px 20px 0;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+  }
+  
+  .copyright {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 0.8rem;
+    color: #666;
+  }
+  
