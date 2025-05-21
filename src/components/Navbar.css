@@ -15,11 +15,13 @@
     display: flex;
     list-style: none;
     gap: 2rem;
+    color: #fff;
   }
   
   .nav-icons {
     display: flex;
     gap: 1rem;
     font-size: 1.2rem;
+    color: #fff;
   }
   
