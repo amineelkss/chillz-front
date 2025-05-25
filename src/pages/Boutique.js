@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronDown, Globe } from "lucide-react";
+import { Link } from "react-router-dom";
 import cannettePNG from "../assets/canette.png";
 
 const categories = ["Afrique", "Europe", "Asie", "Océanie", "Amérique"];
@@ -67,10 +68,13 @@ export default function Boutique() {
       </div>
 
       <div className="text-center">
-        <button className="bg-pink-600 hover:bg-pink-500 text-white px-6 py-2 rounded-full shadow">
-          Voir plus
-        </button>
+        <Link to="/product">
+          <button className="bg-pink-600 hover:bg-pink-500 text-white px-6 py-2 rounded-full shadow">
+            Voir plus
+          </button>
+        </Link>
       </div>
+
     </div>
   );
 }

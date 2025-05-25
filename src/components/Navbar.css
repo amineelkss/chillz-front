@@ -1,27 +1,79 @@
+.navbar-container {
+  width: 100%;
+  background: #E72E5A;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: #E72E5A;
-  }
-  
-  .logo {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem 1.5rem; /* Plus de padding vertical */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  color: white;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.menu-and-icons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+.nav-icons {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-    color: #fff;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: #E72E5A;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    display: none;
   }
-  
-  .nav-icons {
+
+  .nav-links.active {
     display: flex;
-    gap: 1rem;
-    font-size: 1.2rem;
-    color: #fff;
   }
-  
+
+  .menu-icon {
+    display: block;
+  }
+}

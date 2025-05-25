@@ -7,6 +7,8 @@ import Boutique from "./pages/Boutique";
 import Magasin from "./pages/Magasin";
 import Contact from "./pages/Contact";
 import Connexion from "./pages/Connexion";
+import Product from "./pages/Product";
+import Inscription from "./pages/Inscription";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/magasin" element={<Magasin />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/connexion" element={<Connexion />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/inscription" element={<Inscription />} />
       </Routes>
       <Footer />
     </Router>
