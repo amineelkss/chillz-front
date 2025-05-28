@@ -24,7 +24,7 @@ const Home = () => {
               className="w-full max-w-md"
             />
             <Link
-              to="/boutique"
+              to="/shop"
               className="inline-block bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300"
             >
               Découvre la suite
