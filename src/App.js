@@ -23,13 +23,13 @@ function App() {
           <Router>
               <Navbar />
               <Routes>
-                  <Route path="/" element={<Home />} /> {/* Home devient la route racine */}
+                  <Route path="/" element={<Home />} />
                   <Route path="/shop" element={<Shop />} />
                   <Route path="/magasin" element={<Magasin />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
                   <Route path="/logout"  element={<Logout />} />
-                  <Route path="/product" element={<Product />} />
+                  <Route path="/product/:id" element={<Product />} />
                   <Route path="/register" element={<PublicRoute><Register /></PublicRoute> } />
               </Routes>
               <Footer />

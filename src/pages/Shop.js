@@ -4,26 +4,23 @@ import { Link } from "react-router-dom";
 import cannettePNG from "../assets/canette.png";
 
 const categories = ["Afrique", "Europe", "Asie", "Océanie", "Amérique"];
-const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function Shop() {
     const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`${apiUrl}/product`)
-            .then((res) => res.json())
-            .then((data) => {
+        const fetchProducts = async () => {
+            try {
+                const res = await fetch(`${process.env.REACT_APP_API_URL}/product`);
+                const data = await res.json();
                 setProducts(data);
-                setLoading(false);
-            })
-            .catch((err) => {
+            } catch (err) {
                 console.error("Erreur de chargement des produits :", err);
-                setLoading(false);
-            });
-    }, []);
+            }
+        };
 
-    if (loading) return <p className="text-center py-10">Chargement des produits...</p>;
+        fetchProducts();
+    }, []);
 
     return (
     <div className="p-6 max-w-screen-xl mx-auto">
@@ -59,14 +56,14 @@ export default function Shop() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-8">
         {products.map((product) => (
           <div key={product.id} className="relative flex flex-col items-center">
-            <div className="relative w-[180px] h-[240px] flex justify-center">
+            <Link to={`/product/${product.id}`} className="relative w-[180px] h-[240px] flex justify-center">
               <div className="absolute top-0 w-full h-3/5 bg-orange-50 rounded-xl"></div>
               <img
                 src={cannettePNG}
                 alt={product.title}
                 className="absolute -top-10 w-28 h-56 object-contain z-10"
               />
-            </div>
+            </Link>
             <div className="w-full px-1 mt-4 text-sm">
               <div className="flex justify-between">
                 <p className="font-medium">{product.title}</p>
