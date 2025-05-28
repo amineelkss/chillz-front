@@ -1,9 +1,26 @@
-import React, { useState } from "react";
+import React, {useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import productImage from "../assets/can-bissap.png";
 
 const ProductPage = () => {
-  const [quantity, setQuantity] = useState(2);
+  const { id } = useParams();
+  const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState({});
   const [choice, setChoice] = useState("canette");
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/product/${id}`);
+        const data = await res.json();
+        setProduct(data);
+      } catch (err) {
+        console.error("Erreur lors du chargement du produit :", err);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-0 pb-10">
@@ -16,8 +33,8 @@ const ProductPage = () => {
         {/* Infos */}
         <div className="lg:w-1/2 flex flex-col justify-start gap-4 mt-6 lg:mt-12">
           <div className="flex items-start justify-between">
-            <h1 className="text-3xl font-bold">Lorem ipsum</h1>
-            <span className="text-2xl text-[#C32056] font-bold">2€</span>
+            <h1 className="text-3xl font-bold">{product.title}</h1>
+            <span className="text-2xl text-[#C32056] font-bold">{product.price}€</span>
           </div>
           <div className="flex items-center gap-2">
             {Array(5).fill().map((_, i) => (
@@ -26,7 +43,7 @@ const ProductPage = () => {
             <a href="#" className="text-sky-400 text-sm">(33 avis)</a>
           </div>
           <p className="text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
+            {product.description}
           </p>
 
           <div>
@@ -71,18 +88,16 @@ const ProductPage = () => {
       {/* Tableau des infos nutritionnelles */}
       <div className="mt-12 grid lg:grid-cols-2 gap-6">
         <div>
-          <h2 className="text-lg font-semibold mb-4">Calories</h2>
+          <h2 className="text-lg font-semibold mb-4">Calories : {product.energy}</h2>
           <table className="w-full text-left text-sm">
             <tbody className="divide-y divide-white/30">
               {[
-                ["Matières grasses", "0.2g"],
-                ["Dont acides gras saturés", "0.05g"],
-                ["Glucides", "16g"],
-                ["Dont sucres", "14g"],
-                ["Protéines", "0.4g"],
-                ["Sel", "0.02g"],
-                ["Vitamine C", "18mg"],
-                ["Polyphénols", "85mg"]
+                ["Glucides", `${product.carbohydrates}g`],
+                ["Dont sucres", `${product.carbohydratesSugar}g`],
+                ["Graisses", `${product.fats}g`],
+                ["Dont saturées", `${product.fatsSaturated}g`],
+                ["Protéines", `${product.proteins}g`],
+                ["Sel", `${product.salt}g`]
               ].map(([name, value]) => (
                 <tr key={name} className="border-b">
                   <td className="py-2 px-4 bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-600 text-white font-semibold rounded-l-md">{name}</td>
