@@ -23,7 +23,7 @@ const Login = () => {
       });
 
       const data = await res.json();
-
+      
       if (!res.ok) {
         const errorMap = {};
         if (data.errors && Array.isArray(data.errors)) {
@@ -33,6 +33,10 @@ const Login = () => {
             }
             errorMap[err.path].push(err.msg);
           });
+        }
+
+        if (!data.errors && data.message) {
+          errorMap.general = data.message;
         }
 
         setErrors(errorMap);
@@ -91,6 +95,10 @@ const Login = () => {
               {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
             </div>
 
+            {errors.general && (
+                <p className="text-red-500 text-sm text-center mb-4">{errors.general}</p>
+            )}
+
             <button
               type="submit"
               className="w-full bg-[#C32056] hover:bg-[#a91a48] text-white font-semibold py-2 rounded-full shadow"
@@ -101,7 +109,7 @@ const Login = () => {
 
           <p className="text-sm text-center mt-6">
             Vous n'avez pas de compte ?{' '}
-            <Link to="/inscription" className="text-sky-500 font-medium hover:underline">
+            <Link to="/register" className="text-sky-500 font-medium hover:underline">
               S'inscrire
             </Link>
           </p>
