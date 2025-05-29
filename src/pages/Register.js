@@ -5,6 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 const Register = () => {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [addressContent, setAddressContent] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -47,6 +48,8 @@ const Register = () => {
                   lastname,
                   username,
                   birthdate,
+                  address_title: 'Domicile',
+                  address_content: addressContent,
                   phone,
                   email,
                   password
@@ -89,7 +92,7 @@ const Register = () => {
           <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                   <label htmlFor="firstname" className="block text-sm font-medium mb-1">
-                      Firstname
+                      Prénom
                   </label>
                   <input
                       id="firstname"
@@ -102,7 +105,7 @@ const Register = () => {
               </div>
               <div>
                   <label htmlFor="lastname" className="block text-sm font-medium mb-1">
-                      Lastname
+                      Nom
                   </label>
                   <input
                       id="lastname"
@@ -114,8 +117,8 @@ const Register = () => {
                   {errors.lastname && <p className="text-red-500 text-sm mt-1">{errors.lastname}</p>}
               </div>
               <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-1">
-                      Username
+                  <label htmlFor="username" className="block text-sm font-medium mb-1">
+                      Pseudo
                   </label>
                   <input
                       id="username"
@@ -138,6 +141,19 @@ const Register = () => {
                       className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
                   />
                   {errors.birthdate && <p className="text-red-500 text-sm mt-1">{errors.birthdate}</p>}
+              </div>
+              <div>
+                  <label htmlFor="addressContent" className="block text-sm font-medium mb-1">
+                      Addresse
+                  </label>
+                  <input
+                      id="addressContent"
+                      type="text"
+                      value={addressContent}
+                      onChange={(e) => setAddressContent(e.target.value)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  />
+                  {errors.address_content && <p className="text-red-500 text-sm mt-1">{errors.address_content}</p>}
               </div>
               <div>
                   <label htmlFor="phone" className="block text-sm font-medium mb-1">
@@ -174,6 +190,7 @@ const Register = () => {
               <input
                 id="password"
                 type="password"
+                placeholder="**********"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
@@ -188,6 +205,7 @@ const Register = () => {
               <input
                 id="confirmPassword"
                 type="password"
+                placeholder="**********"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
