@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { CheckCircle2 } from 'lucide-react';
 import bissapCanImage from "../assets/cartImageCanBissap.png";
 
 export default function CheckoutSteps() {
-  const [step, setStep] = useState(2); // Commence à l'étape 2 (Détails)
+  const [step, setStep] = useState(2);
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
@@ -13,7 +14,8 @@ export default function CheckoutSteps() {
         <nav className="text-sm text-gray-500 mb-4">
           <span className={step === 2 ? 'text-pink-600 font-semibold' : ''}>Détails</span> {'>'} {' '}
           <span className={step === 3 ? 'text-pink-600 font-semibold' : ''}>Livraison</span> {'>'} {' '}
-          <span className={step === 4 ? 'text-pink-600 font-semibold' : ''}>Paiement</span>
+          <span className={step === 4 ? 'text-pink-600 font-semibold' : ''}>Paiement</span> {'>'} {' '}
+          <span className={step === 5 ? 'text-pink-600 font-semibold' : ''}>Confirmation</span>
         </nav>
 
         {step === 2 && (
@@ -76,23 +78,56 @@ export default function CheckoutSteps() {
               </div>
             </div>
             <button onClick={prevStep} className="text-sky-500 mt-4">Retour</button>
-            <button className="ml-4 bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-2 rounded-full shadow">Payer</button>
+            <button onClick={nextStep} className="ml-4 bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-2 rounded-full shadow">Payer</button>
+          </div>
+        )}
+
+        {step === 5 && (
+          <div className="flex flex-col items-center text-center p-10 bg-green-50 rounded shadow-xl">
+            <CheckCircle2 className="w-20 h-20 text-green-500 mb-4" />
+            <h2 className="text-2xl font-bold text-green-700 mb-2">Paiement validé !</h2>
+            <p className="text-gray-600 mb-6">Merci pour votre commande. Vous recevrez un e-mail de confirmation sous peu.</p>
+            <button className="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-3 rounded-full shadow">Retour à l'accueil</button>
           </div>
         )}
       </div>
 
-      {/* Colonne droite toujours visible */}
       <div className="bg-yellow-50 p-6 rounded">
-        <img src={bissapCanImage} alt="Chill'Z Bisap" className="mb-4 w-28" />
-        <p>Chill'Z Bisap <span className="text-pink-600 font-semibold">10€</span></p>
-        <div className="mt-4 flex gap-2">
-          <input type="text" value="CHILLZ15" className="border rounded px-3 py-2 w-full" readOnly />
-          <button className="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-4 py-2 rounded-full shadow">Ajouter</button>
+        <div className="flex items-center gap-4 mb-4">
+          <img src={bissapCanImage} alt="Chill'Z Bisap" className="w-28" />
+          <p className="text-lg font-medium">
+            Chill'Z Bisap <span className="text-pink-600 font-semibold">10€</span>
+          </p>
         </div>
+
+        <div className="mt-4 flex gap-2">
+          <input
+            type="text"
+            value="CHILLZ15"
+            className="border rounded px-3 py-2 w-full"
+            readOnly
+          />
+          <button className="bg-gradient-to-r from-pink-600 to-pink-700 text-white px-4 py-2 rounded-full shadow">
+            Ajouter
+          </button>
+        </div>
+
         <div className="mt-6">
-          <p>Sous-total: <span className="float-right text-pink-600">10€</span></p>
-          <p>Frais de livraison: <span className="float-right text-pink-600">{step >= 3 ? '3€' : 'Prochaine étape'}</span></p>
-          <p className="font-semibold mt-2">Total: <span className="float-right text-pink-600">{step >= 3 ? '13€' : '13€'}</span></p>
+          <p>
+            Sous-total: <span className="float-right text-pink-600">10€</span>
+          </p>
+          <p>
+            Frais de livraison:{' '}
+            <span className="float-right text-pink-600">
+              {step >= 3 ? '3€' : 'Prochaine étape'}
+            </span>
+          </p>
+          <p className="font-semibold mt-2">
+            Total:{' '}
+            <span className="float-right text-pink-600">
+              {step >= 3 ? '13€' : '13€'}
+            </span>
+          </p>
         </div>
       </div>
     </div>
