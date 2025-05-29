@@ -42,54 +42,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Bangers Section */}
-      <section className="py-16 px-6 bg-white">
-        <div className="flex justify-center">
-          <div className="w-full max-w-[calc(5*12rem+4*1rem+2rem)]"> {/* 5 cards * 48 (12rem), 4 gaps * 1rem, padding */}
-            <div className="flex justify-between items-center px-4 mb-10">
-              <h2 className="text-3xl font-bold text-left">
-                Nos <span className="underline decoration-pink-500">bangers</span>
-              </h2>
-              <div className="flex gap-4">
-                <button className="p-2 bg-pink-100 rounded-full hover:bg-pink-200">
-                  <ArrowLeft className="text-pink-500" />
-                </button>
-                <button className="p-2 bg-pink-100 rounded-full hover:bg-pink-200">
-                  <ArrowRight className="text-pink-500" />
-                </button>
-              </div>
-            </div>
 
-            <div className="flex overflow-x-auto space-x-4 px-4">
-              {[...Array(5)].map((_, i) => (
-                <div
-                  key={i}
-                  className={`w-48 flex-shrink-0 p-4 rounded-2xl shadow-md flex flex-col items-center justify-center ${
-                    i === 2 ? "bg-orange-100 border-4 border-orange-300" : "bg-white"
-                  }`}
-                >
-                  <img
-                    src={canImage}
-                    alt="ChillZ Can"
-                    className={`object-contain ${
-                      i === 2 ? "w-24 mb-4" : "w-full h-full"
-                    }`}
-                  />
-                  {i === 2 && (
-                    <>
-                      <p className="text-sm font-medium">Lorem Ipsum</p>
-                      <p className="text-md font-semibold">2€</p>
-                      <button className="mt-2 bg-yellow-500 text-white py-1 px-3 rounded-full">
-                        Voir
-                      </button>
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       <CansSliderSection />
       

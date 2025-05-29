@@ -13,6 +13,8 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Product from "./pages/Product";
 import Register from "./pages/Register";
+import Cart from "./pages/Cart";
+import CheckoutSteps from "./pages/CheckoutSteps";
 
 import { AuthProvider } from "./contexts/AuthContext";
 
@@ -25,6 +27,8 @@ function App() {
               <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/shop" element={<Shop />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/checkout" element={<CheckoutSteps />} />
                   <Route path="/magasin" element={<Magasin />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
