@@ -33,6 +33,9 @@ export default function Navbar() {
             <li><Link to="/shop" onClick={closeMenu}>Boutique</Link></li>
             <li><Link to="/magasin" onClick={closeMenu}>Trouver un magasin</Link></li>
             <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
+              {user?.role === 'ADMIN' && (
+                  <li><Link to="/backoffice" onClick={closeMenu}>Backoffice</Link></li>
+              )}
             {user ? (
               <li>
                 <button

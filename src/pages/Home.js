@@ -4,8 +4,8 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { CansSliderSection, CanDetailsSection, SubscriptionBanner } from "./HomeSections";
 import canImage from "../assets/can.png";
 import floatingCansImage from "../assets/cans-floating.png";
-import chillzDrinkImage from "../assets/chillz-drink.png"; // Nouvelle image importée
-import bgHeroImage from "../assets/bg-hero.png"; // Nouvelle image de fond
+import chillzDrinkImage from "../assets/chillz-drink.png";
+import bgHeroImage from "../assets/bg-hero.png";
 
 const Home = () => {
   return (
