@@ -21,6 +21,7 @@ import ClientPage from "./pages/ClientPage";
 import ConditionsUtilisation from "./pages/legal/ConditionsUtilisation";
 import MentionsLegales from "./pages/legal/MentionsLegales";
 import Cookies from "./pages/legal/Cookies";
+import AboutPage from "./pages/AboutPage";
 
 import Products from './pages/backoffice/ProductList';
 
@@ -50,6 +51,7 @@ function App() {
                   <Route path="/conditionsutilisation" element={<ConditionsUtilisation /> } />
                   <Route path="/mentionslegales" element={<MentionsLegales /> } />
                   <Route path="/cookies" element={<Cookies /> } />
+                  <Route path="/about" element={<AboutPage /> } />
               </Routes>
               <Footer />
           </Router>
