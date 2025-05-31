@@ -18,6 +18,9 @@ import Cart from "./pages/Cart";
 import CheckoutSteps from "./pages/CheckoutSteps";
 import BackofficeHome from "./pages/BackofficeHome";
 import ClientPage from "./pages/ClientPage";
+import ConditionsUtilisation from "./pages/legal/ConditionsUtilisation";
+import MentionsLegales from "./pages/legal/MentionsLegales";
+import Cookies from "./pages/legal/Cookies";
 
 import Products from './pages/backoffice/ProductList';
 
@@ -44,6 +47,9 @@ function App() {
                     <Route path="products" element={<Products />} />
                   </Route>
                   <Route path="/client" element={<ClientPage /> } />
+                  <Route path="/conditionsutilisation" element={<ConditionsUtilisation /> } />
+                  <Route path="/mentionslegales" element={<MentionsLegales /> } />
+                  <Route path="/cookies" element={<Cookies /> } />
               </Routes>
               <Footer />
           </Router>

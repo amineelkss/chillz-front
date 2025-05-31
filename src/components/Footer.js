@@ -1,5 +1,6 @@
 import React from "react";
 import { FaInstagram, FaTiktok, FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 export default function Footer() {
@@ -9,18 +10,18 @@ export default function Footer() {
         <div className="footer-column">
           <h3>Communication</h3>
           <ul>
-            <li>FAQ</li>
-            <li>Nous contacter</li>
+            <li><Link to="/faq">FAQ</Link></li>
+            <li><Link to="/contact">Nous contacter</Link></li>
           </ul>
         </div>
 
         <div className="footer-column">
           <h3>Informations générales</h3>
           <ul>
-            <li>À propos de</li>
-            <li>Mentions légales</li>
-            <li>Conditions d’utilisations</li>
-            <li>Cookies</li>
+            <li><Link to="/about">À propos de</Link></li>
+            <li><Link to="/mentionslegales">Mentions légales</Link></li>
+            <li><Link to="/conditionsutilisation">Conditions d’utilisation</Link></li>
+            <li><Link to="/cookies">Cookies</Link></li>
           </ul>
         </div>
 
@@ -32,15 +33,15 @@ export default function Footer() {
           </div>
           <p className="email">chillz@adressemail.com</p>
           <div className="social-icons">
-            <FaInstagram />
-            <FaTiktok />
-            <FaLinkedin />
+            <a href="#" aria-label="Instagram"><FaInstagram /></a>
+            <a href="#" aria-label="TikTok"><FaTiktok /></a>
+            <a href="#" aria-label="LinkedIn"><FaLinkedin /></a>
           </div>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p>Copyright Chillz</p>
+        <p>&copy; {new Date().getFullYear()} Chillz. Tous droits réservés.</p>
       </div>
     </footer>
   );
