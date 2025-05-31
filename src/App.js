@@ -17,6 +17,7 @@ import Register from "./pages/Register";
 import Cart from "./pages/Cart";
 import CheckoutSteps from "./pages/CheckoutSteps";
 import BackofficeHome from "./pages/BackofficeHome";
+import ClientPage from "./pages/ClientPage";
 
 import Products from './pages/backoffice/ProductList';
 
@@ -42,6 +43,7 @@ function App() {
                     <Route index element={<BackofficeHome />} />
                     <Route path="products" element={<Products />} />
                   </Route>
+                  <Route path="/client" element={<ClientPage /> } />
               </Routes>
               <Footer />
           </Router>
