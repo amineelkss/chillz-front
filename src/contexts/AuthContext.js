@@ -4,34 +4,41 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        const storedUser = localStorage.getItem("user");
+        const fetchUser = async () => {
+            try {
+                const res = await fetch(`${process.env.REACT_APP_API_URL}/user/profile`, {
+                    method: "GET",
+                    credentials: "include",
+                });
 
-        try {
-            if (token && storedUser) {
-                setUser(JSON.parse(storedUser));
+                if (!res.ok) throw new Error("Utilisateur non authentifié");
+
+                const data = await res.json();
+                setUser(data.user);
+            } catch (err) {
+                console.error("Erreur :", err);
+                setUser(null);
+            } finally {
+                setLoading(false);
             }
-        } catch (e) {
-            console.error("Erreur lors du parsing de l'utilisateur :", e);
-            localStorage.removeItem("user");
-            localStorage.removeItem("token");
-        }
+        };
+
+        fetchUser();
     }, []);
 
-    const login = (userData, token) => {
-        localStorage.setItem("user", JSON.stringify(userData));
+    const login = (userData) => {
         setUser(userData);
     };
 
     const logout = () => {
-        localStorage.removeItem("user");
         setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );

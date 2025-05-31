@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import PublicRoute from "./components/PublicRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
@@ -15,9 +16,11 @@ import Product from "./pages/Product";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
 import CheckoutSteps from "./pages/CheckoutSteps";
+import BackofficeHome from "./pages/BackofficeHome";
+
+import Products from './pages/backoffice/ProductList';
 
 import { AuthProvider } from "./contexts/AuthContext";
-
 
 function App() {
   return (
@@ -35,6 +38,10 @@ function App() {
                   <Route path="/logout"  element={<Logout />} />
                   <Route path="/product/:id" element={<Product />} />
                   <Route path="/register" element={<PublicRoute><Register /></PublicRoute> } />
+                  <Route path="/backoffice" element={<ProtectedRoute/>} >
+                    <Route index element={<BackofficeHome />} />
+                    <Route path="products" element={<Products />} />
+                  </Route>
               </Routes>
               <Footer />
           </Router>
