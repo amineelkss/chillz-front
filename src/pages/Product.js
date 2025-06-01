@@ -1,6 +1,5 @@
 import React, {useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import productImage from "../assets/can-bissap.png";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -27,7 +26,7 @@ const ProductPage = () => {
       <div className="flex flex-col lg:flex-row gap-10">
         {/* Image + courbe */}
         <div className="lg:w-1/2 relative">
-          <img src={productImage} alt="Produit ChillZ" className="rounded-bl-[80px] w-full" />
+          <img src={`${process.env.REACT_APP_API_URL}${product.picture}`} alt="Produit ChillZ" className="rounded-bl-[80px] w-full" />
         </div>
 
         {/* Infos */}

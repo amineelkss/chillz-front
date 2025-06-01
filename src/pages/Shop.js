@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDown, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
-import cannettePNG from "../assets/canette.png";
 
 // const categories = ["Afrique", "Europe", "Asie", "Océanie", "Amérique"];
 
@@ -63,7 +62,7 @@ export default function Shop() {
             <Link to={`/product/${product.id}`} className="relative w-[180px] h-[240px] flex justify-center">
               <div className="absolute top-0 w-full h-3/5 bg-orange-50 rounded-xl"></div>
               <img
-                src={cannettePNG}
+                src={`${process.env.REACT_APP_API_URL}${product.picture}`}
                 alt={product.title}
                 className="absolute -top-10 w-28 h-56 object-contain z-10"
               />

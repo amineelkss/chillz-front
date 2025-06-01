@@ -8,8 +8,17 @@ const BackOfficeForm = ({ initialData = {}, fields, onClose, onSave, title }) =>
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
-        setFormData(initialData);
-    }, [initialData]);
+        const initial = { ...initialData }; // Inclut id et autres champs
+
+        // Ajout d'une valeur par défaut pour les toggles manquants
+        fields.forEach(({ name, type }) => {
+            if (initial[name] === undefined && type === 'toggle') {
+                initial[name] = false;
+            }
+        });
+
+        setFormData(initial);
+    }, [initialData, fields]);
 
     const handleChange = (e, name) => {
         if (e.target.type === 'file') {
@@ -25,9 +34,11 @@ const BackOfficeForm = ({ initialData = {}, fields, onClose, onSave, title }) =>
                 }));
             }
         } else {
+            let value = e.target.value;
+
             setFormData(prev => ({
                 ...prev,
-                [name]: e.target.value,
+                [name]: value,
             }));
         }
     };
@@ -51,25 +62,26 @@ const BackOfficeForm = ({ initialData = {}, fields, onClose, onSave, title }) =>
             >
                 <h2 className="text-xl font-semibold mb-4">{title}</h2>
 
-                {fields.map(({ name, label, type, step, options, min, max/* required */ }) => (
+                {fields.map(({ name, label, type, step, options, min, max, required/* required */ }) => (
                     <label key={name} className="block mb-4">
                         {label}
                         {type === 'textarea' ? (
                             <textarea
                                 value={formData[name] || ''}
                                 onChange={e => handleChange(e, name)}
-                                /*required={required}*/
+                                required={required}
                                 className="mt-1 w-full border rounded px-3 py-2"
                             />
                         ) : type === 'toggle' ? (
                             <ToggleSwitch
-                                isOn={formData[name] || false}
-                                handleToggle={() => handleChange({ target: { value: !formData[name] } }, name)}
+                                isOn={formData[name] ?? false}
+                                handleToggle={() => handleChange({ target: { value: !formData[name]  } }, name)}
                             />
                         ) : type === 'file' ? (
                             <input
                                 type="file"
                                 accept="image/png, image/jpeg, image/jpg"
+                                required={required}
                                 onChange={e => handleChange(e, name)}
                                 className="mt-1 w-full border rounded px-3 py-2"
                             />
@@ -78,6 +90,7 @@ const BackOfficeForm = ({ initialData = {}, fields, onClose, onSave, title }) =>
                             <select
                                 value={formData[name] || ''}
                                 onChange={e => handleChange(e, name)}
+                                required={required}
                                 className="mt-1 w-full border rounded px-3 py-2"
                             >
                                 <option value="">-- Choisir --</option>
