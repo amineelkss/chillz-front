@@ -48,7 +48,7 @@ const BackOfficeTable = ({ data, columns, onEdit, onDelete, onToggle }) => {
                             )}
                             {onToggle && (
                                 <ToggleSwitch
-                                    isOn={item.isActive}
+                                    isOn={item.isActivated}
                                     handleToggle={() => onToggle(item.id)}
                                 />
                             )}

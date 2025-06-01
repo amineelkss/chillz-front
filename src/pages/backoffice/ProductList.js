@@ -33,7 +33,7 @@ const ProductList = () => {
     const handleToggle = async (id) => {
         setProducts(prev =>
             prev.map(p =>
-                p.id === id ? { ...p, isActive: !p.isActive } : p
+                p.id === id ? { ...p, isActivated: !p.isActivated } : p
             )
         );
 
@@ -49,7 +49,9 @@ const ProductList = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Confirmer la suppression ?')) return;
         try {
-            await fetch(`${process.env.REACT_APP_API_URL}/product/delete/${id}`, { method: 'DELETE' });
+            await fetch(`${process.env.REACT_APP_API_URL}/backoffice/product/delete/${id}`,
+                { method: 'DELETE',
+                      credentials: 'include'});
             fetchProducts();
         } catch (error) {
             console.error('Erreur suppression produit', error);
@@ -61,15 +63,24 @@ const ProductList = () => {
             const method = product.id ? 'PUT' : 'POST';
             const url = product.id ? `${process.env.REACT_APP_API_URL}/backoffice/product/update/${product.id}` : `${process.env.REACT_APP_API_URL}/backoffice/product/new`;
 
+            const formData = new FormData();
+
+            for (const key in product) {
+                if (key === 'id') continue;
+                if (key === 'picture' && product.picture instanceof File) {
+                    formData.append('picture', product.picture);
+                } else {
+                    formData.append(key, product[key]);
+                }
+            }
+
             const res = await fetch(url, {
                 method,
                 credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(product),
+                body: formData,
             });
 
             const data = await res.json();
-            console.log('TEST',data.errors);
             if (!res.ok) {
                 return parseBackendErrors(data);
             }
