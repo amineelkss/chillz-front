@@ -79,27 +79,26 @@ export const CanDetailsSection = () => (
 
 export const SubscriptionBanner = () => (
   <section className="py-20 px-6">
-    <div className="w-full max-w-4xl mx-auto rounded-3xl overflow-hidden text-white bg-cover bg-center p-6 md:p-12" style={{ backgroundImage: `url(${bannerBg})` }}>
+    <div
+      className="w-full max-w-4xl mx-auto rounded-3xl overflow-hidden text-white bg-cover bg-center p-6 md:p-12"
+      style={{ backgroundImage: `url(${bannerBg})` }}
+    >
       <div className="text-center">
         <h2 className="text-2xl md:text-3xl font-semibold mb-6">
           Abonnez-vous pour bénéficier d'une remise de 20 %
         </h2>
-        <form className="flex flex-wrap sm:flex-nowrap justify-center items-center gap-2 bg-white rounded-full p-1 w-full max-w-xl mx-auto">
-          <div className="flex-grow min-w-0">
-            <input
-              type="email"
-              placeholder="Adresse email"
-              className="w-full px-4 py-2 rounded-full outline-none text-black"
-            />
-          </div>
-          <div className="shrink-0">
-            <button
-              type="submit"
-              className="bg-[#C32056] text-white font-semibold px-6 py-2 rounded-full whitespace-nowrap"
-            >
-              Button
-            </button>
-          </div>
+        <form className="flex justify-center items-center bg-white rounded-full p-1 w-full max-w-xl mx-auto overflow-x-auto whitespace-nowrap">
+          <input
+            type="email"
+            placeholder="Adresse email"
+            className="px-4 py-2 rounded-l-full outline-none text-black flex-grow min-w-[200px]"
+          />
+          <button
+            type="submit"
+            className="bg-[#C32056] text-white font-semibold px-6 py-2 rounded-r-full whitespace-nowrap shrink-0"
+          >
+            Envoyer
+          </button>
         </form>
       </div>
     </div>
