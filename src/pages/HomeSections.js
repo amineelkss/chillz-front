@@ -22,9 +22,9 @@ export const CansSliderSection = () => (
           className="w-full md:w-1/2 object-contain"
         />
         <div className="md:w-1/2 text-left">
-          <h2 className="text-3xl font-bold mb-4">Lorem ipsum</h2>
+          <h2 className="text-3xl font-bold mb-4">On est un retour aux sources</h2>
           <p className="mb-6 text-gray-700">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+            CHILL’Z, c’est pas un nouveau soda tendance. C’est le goût du gingembre de Tata, le bissap des fêtes, remixés pour aujourd’hui. On vient poser ça en rayon pour que toi, moi, nous, on puisse enfin retrouver nos classiques dans les frigos du coin. Pas besoin de chercher loin : le vrai, le bon, le puissant est juste là, prêt à être chillé.
           </p>
           <button className="bg-[#C32056] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#aa1846] transition">
             Découvrir
@@ -40,18 +40,18 @@ export const CanDetailsSection = () => (
     <div className="max-w-6xl mx-auto text-center mb-12">
       <h2 className="text-4xl font-extrabold mb-4">Notre <span className="underline decoration-sky-400">canette</span></h2>
       <p className="text-gray-600">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        🌺 Connu pour sa couleur rouge intense et son goût acidulé, le bissap, aussi appelé jus d’hibiscus, est bien plus qu’une boisson rafraîchissante. Très populaire en Afrique de l’Ouest, il regorge de bienfaits naturels pour le corps. Voici 3 bonnes raisons d’en boire ! 👇
       </p>
     </div>
     <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center gap-10">
       <div className="md:w-1/3 text-right">
         <div className="mb-8">
-          <h3 className="font-semibold text-lg mb-2">Lorem ipsum</h3>
-          <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+          <h3 className="font-semibold text-lg mb-2">Riche en antioxydants</h3>
+          <p className="text-gray-600">Le bissap contient des anthocyanes (des pigments naturels) qui aident à lutter contre les radicaux libres, responsables du vieillissement prématuré des cellules.</p>
         </div>
         <div>
-          <h3 className="font-semibold text-lg mb-2">Lorem ipsum</h3>
-          <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+          <h3 className="font-semibold text-lg mb-2">Favorise la digestion</h3>
+          <p className="text-gray-600">Il possède des propriétés diurétiques et légèrement laxatives, ce qui aide à nettoyer l’organisme et faciliter le transit intestinal.</p>
         </div>
       </div>
 
@@ -65,8 +65,8 @@ export const CanDetailsSection = () => (
 
       <div className="md:w-1/3 text-left">
         <div className="mb-8">
-          <h3 className="font-semibold text-lg mb-2">Lorem ipsum</h3>
-          <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+          <h3 className="font-semibold text-lg mb-2">Réduit la tension artérielle</h3>
+          <p className="text-gray-600">Des études ont montré que le bissap peut aider à faire baisser l’hypertension, grâce à ses effets relaxants sur les vaisseaux sanguins.</p>
         </div>
         <div>
           <h3 className="font-semibold text-lg mb-2">Lorem ipsum</h3>

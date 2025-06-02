@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { ChevronDown, Globe } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-
-// const categories = ["Afrique", "Europe", "Asie", "Océanie", "Amérique"];
+import cannettePNG from "../assets/canette.png";
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
@@ -27,21 +26,6 @@ export default function Shop() {
         Notre <span className="underline decoration-sky-400">boutique</span>
       </h1>
 
-      {/* Catégories supprimées selon demande manager */}
-      {/* 
-      <div className="flex items-center space-x-4 mt-4">
-        <span className="font-semibold">Nos <span className="underline">catégories</span></span>
-        <div className="flex space-x-2">
-          {categories.map((cat, i) => (
-            <div key={i} className="bg-pink-100 rounded-full p-3 cursor-pointer">
-              <Globe className="w-6 h-6 text-pink-600" />
-            </div>
-          ))}
-        </div>
-      </div>
-      */}
-
-      {/* Tri visible uniquement si 2 produits ou plus */}
       {products.length >= 2 && (
         <div className="text-sm space-y-1 mt-4">
           <div className="flex items-center space-x-1 cursor-pointer">
@@ -58,26 +42,22 @@ export default function Shop() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 my-8">
         {products.map((product) => (
-          <div key={product.id} className="relative flex flex-col items-center">
-            <Link to={`/product/${product.id}`} className="relative w-[180px] h-[240px] flex justify-center">
-              <div className="absolute top-0 w-full h-3/5 bg-orange-50 rounded-xl"></div>
+          <div key={product.id} className="flex flex-col aspect-[3/4]">
+            <Link
+              to={`/product/${product.id}`}
+              className="flex-1 flex items-center justify-center overflow-hidden"
+            >
               <img
-                src={`${process.env.REACT_APP_API_URL}${product.picture}`}
+                src={cannettePNG}
                 alt={product.title}
-                className="absolute -top-10 w-28 h-56 object-contain z-10"
+                className="h-full w-full object-contain block" // ✅ Ajout de "w-full" et "block"
               />
             </Link>
-            <div className="w-full px-1 mt-4 text-sm">
+            <div className="text-sm mt-2"> {/* mt-2 au lieu de mt-4 pour réduire l'espace */}
               <div className="flex justify-between">
-                <p className="font-medium">{product.title}</p>
+                <p className="font-medium truncate">{product.title}</p>
                 <p className="text-blue-400 text-xs">({product.quantity}ml)</p>
               </div>
-              {/* Avis en étoiles commentés */}
-              {/* <div className="flex justify-start text-yellow-500 text-xs mt-1">
-                {Array.from({ length: 5 }, (_, i) => (
-                  <span key={i}>{i < product.rating ? "★" : "☆"}</span>
-                ))}
-              </div> */}
               <div className="flex justify-end">
                 <p className="text-pink-600 text-sm mt-1">{product.price}€</p>
               </div>
@@ -86,7 +66,7 @@ export default function Shop() {
         ))}
       </div>
 
-      {/* Bouton "Voir plus" visible seulement si plus de 6 produits */}
+
       {products.length > 6 && (
         <div className="text-center">
           <Link to="/product">
