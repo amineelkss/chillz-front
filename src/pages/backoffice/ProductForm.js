@@ -36,7 +36,6 @@ const ProductForm = ({ product, onClose, onSave }) => {
         { label: 'Titre', name: 'title', type: 'text'},
         { label: 'Description', name: 'description', type: 'textarea' },
         { label: 'Quantité', name: 'quantity', type: 'number', min: '1' },
-        { label: 'Prix', name: 'price', type: 'number', step: '0.01', min: '0.01', max: '999.99'},
         { label: 'Ingrédients', name: 'ingredients', type: 'textarea'},
         { label: 'Catégorie', name: 'category', type: 'select', options: ['Afrique', 'Asie', 'Amérique du Sud', 'Australie','Europe']},
         { label: 'Image', name: 'picture', type: 'file', required: true },
