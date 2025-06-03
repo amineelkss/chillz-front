@@ -17,6 +17,7 @@
 .DS_Store
 .env
 .env.prod
+.env.dev
 
 npm-debug.log*
 yarn-debug.log*
