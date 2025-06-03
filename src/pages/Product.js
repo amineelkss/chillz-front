@@ -123,34 +123,36 @@ const ProductPage = () => {
 
       {/* Tableau des infos nutritionnelles */}
       <div className="mt-12 grid lg:grid-cols-2 gap-6">
-        <div>
-          <h2 className="text-lg font-semibold mb-4">Calories : {product.energy}</h2>
-          <table className="w-full text-left text-sm">
-            <tbody className="divide-y divide-white/30">
+        <div className="border border-gray-200 rounded-lg p-6 shadow-sm">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold">Calories</h2>
+            <span className="text-base font-medium">33cl</span>
+          </div>
+          <table className="w-full text-sm">
+            <tbody className="divide-y divide-gray-100">
               {[
-                ["Glucides", `${product.carbohydrates}g`],
-                ["Dont sucres", `${product.carbohydratesSugar}g`],
-                ["Graisses", `${product.fats}g`],
-                ["Dont saturées", `${product.fatsSaturated}g`],
-                ["Protéines", `${product.proteins}g`],
-                ["Sel", `${product.salt}g`]
-              ].map(([name, value]) => (
-                <tr key={name} className="border-b">
-                  <td className="py-2 px-4 bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-600 text-white font-semibold rounded-l-md">{name}</td>
-                  <td className="py-2 px-4 font-medium">{value}</td>
+                ["Matières grasses", `${product.fats || 0}g`],
+                ["Dont acides gras saturés", `${product.fatsSaturated || 0}g`],
+                ["Glucides", `${product.carbohydrates || 0}g`],
+                ["Dont sucres", `${product.carbohydratesSugar || 0}g`],
+                ["Protéines", `${product.proteins || 0}g`],
+                ["Sel", `${product.salt || 0}g`],
+                ["Énergie", `${product.energy || 0}Kcal`]
+              ].map(([label, value]) => (
+                <tr key={label}>
+                  <td className="py-2 font-medium text-gray-700">{label}</td>
+                  <td className="py-2 text-gray-600 text-right">{value}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        <div>
-          <p className="text-sm mb-2">Exercitation ullamco laboris nisi ut.</p>
-          <ul className="list-disc pl-5 text-sm text-gray-600">
-            <li>allergène 1</li>
-            <li>allergène 2</li>
-            <li>allergène 3</li>
-          </ul>
+        <div className="border border-gray-200 rounded-lg p-6 shadow-sm">
+          <p className="text-sm font-medium mb-2">Ingrédient :</p>
+          <p className="text-sm text-gray-700 mb-4">{product.ingredients || "Eau, infusion de fleurs d’hibiscus, sucre de canne, jus de citron, gingembre."}</p>
+          <p className="text-sm font-medium mb-2">Traces éventuelles :</p>
+          <p className="text-sm text-gray-700">{product.traces || "Gluten, fruits à coque, soja, lait, œufs, céleri"}</p>
         </div>
       </div>
     </div>
