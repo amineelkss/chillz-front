@@ -59,7 +59,10 @@ export default function Shop() {
                 <p className="text-blue-400 text-xs">({product.quantity}ml)</p>
               </div>
               <div className="flex justify-end">
-                <p className="text-pink-600 text-sm mt-1">{product.price}€</p>
+                <p className="text-pink-600 text-sm mt-1">€</p>
+                <p className="text-pink-600 text-sm mt-1">
+                  {product.formats && product.formats.length > 0 ? `${parseFloat(product.formats[0].price).toFixed(2)}€` : ""}
+                </p>
               </div>
             </div>
           </div>

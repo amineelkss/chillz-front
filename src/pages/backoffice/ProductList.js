@@ -69,6 +69,8 @@ const ProductList = () => {
                 if (key === 'id') continue;
                 if (key === 'picture' && product.picture instanceof File) {
                     formData.append('picture', product.picture);
+                } else if (key === 'formats') {
+                    formData.append('formats', JSON.stringify(product.formats));
                 } else {
                     formData.append(key, product[key]);
                 }

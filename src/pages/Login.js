@@ -44,7 +44,6 @@ const Login = () => {
       } else {
         login(data.user);
         navigate("/shop");
-        alert("Login réussie !");
       }
     } catch (error) {
       setErrors({ general: "Erreur réseau, veuillez réessayer." });

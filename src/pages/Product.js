@@ -1,11 +1,14 @@
 import React, {useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { addToLocalCart } from "../components/utils/localCard";
 
 const ProductPage = () => {
+  const { user } = useAuth();
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState({});
-  const [choice, setChoice] = useState("canette");
+  const [selectedFormat, setSelectedFormat] = useState(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -13,6 +16,9 @@ const ProductPage = () => {
         const res = await fetch(`${process.env.REACT_APP_API_URL}/product/${id}`);
         const data = await res.json();
         setProduct(data);
+        if (data.formats && data.formats.length > 0) {
+          setSelectedFormat(data.formats[0]);
+        }
       } catch (err) {
         console.error("Erreur lors du chargement du produit :", err);
       }
@@ -20,6 +26,35 @@ const ProductPage = () => {
 
     fetchProduct();
   }, [id]);
+
+  const handleAddToCart = async () => {
+    if (!user) {
+      addToLocalCart(product, quantity, selectedFormat);
+      alert("Produit ajouté au panier !");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/card/${product.id}`, {
+        method: "POST",
+        credentials: 'include',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ quantity, formatId: selectedFormat?.id })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message);
+      }
+
+      alert("Produit ajouté au panier !");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-0 pb-10">
@@ -33,7 +68,7 @@ const ProductPage = () => {
         <div className="lg:w-1/2 flex flex-col justify-start gap-4 mt-6 lg:mt-12">
           <div className="flex items-start justify-between">
             <h1 className="text-3xl font-bold">{product.title}</h1>
-            <span className="text-2xl text-[#C32056] font-bold">{product.price}€</span>
+            <span className="text-2xl text-[#C32056] font-bold">{selectedFormat?.price}€</span>
           </div>
           <div className="flex items-center gap-2">
             {Array(5).fill().map((_, i) => (
@@ -48,18 +83,19 @@ const ProductPage = () => {
           <div>
             <p className="font-semibold mb-2">Votre choix</p>
             <div className="flex gap-2">
-              <button
-                onClick={() => setChoice("canette")}
-                className={`px-4 py-2 rounded-full text-sm font-semibold ${choice === "canette" ? "bg-[#7D0B2A] text-white" : "bg-gray-200 text-gray-700"}`}
-              >
-                Canette
-              </button>
-              <button
-                onClick={() => setChoice("pack")}
-                className={`px-4 py-2 rounded-full text-sm font-semibold ${choice === "pack" ? "bg-[#7D0B2A] text-white" : "bg-gray-200 text-gray-700"}`}
-              >
-                Pack de 8
-              </button>
+              {product.formats?.map((format) => (
+                  <button
+                      key={format.id}
+                      onClick={() => setSelectedFormat(format)}
+                      className={`px-4 py-2 rounded-full text-sm font-semibold ${
+                          selectedFormat?.id === format.id
+                              ? "bg-[#7D0B2A] text-white"
+                              : "bg-gray-200 text-gray-700"
+                      }`}
+                  >
+                    {format.title}
+                  </button>
+              ))}
             </div>
           </div>
 
@@ -78,7 +114,8 @@ const ProductPage = () => {
             </div>
           </div>
 
-          <button className="bg-[#C32056] text-white mt-6 py-3 rounded-full font-semibold shadow-md hover:bg-[#a91a48] transition">
+          <button className="bg-[#C32056] text-white mt-6 py-3 rounded-full font-semibold shadow-md hover:bg-[#a91a48] transition"
+                  onClick={handleAddToCart}>
             Ajouter au panier
           </button>
         </div>
