@@ -14,7 +14,15 @@ export const AuthProvider = ({ children }) => {
                     credentials: "include",
                 });
 
-                if (!res.ok) throw new Error("Utilisateur non authentifié");
+                if (!res.ok) {
+                    if (res.status === 403 || res.status === 401) {
+                        // Token expiré ou absent → utilisateur non connecté
+                        setUser(null);
+                        return;
+                    }
+                    throw new Error("Erreur inattendue");
+                }
+
 
                 const data = await res.json();
                 setUser(data.user);
