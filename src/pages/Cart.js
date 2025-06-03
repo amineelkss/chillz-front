@@ -6,6 +6,18 @@ export default function Cart() {
   const { user } = useAuth();
   const [cart, setCart] = useState({ cards: [], price: 0 });
 
+  const fetchCart = async () => {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/card`, {
+        credentials: "include",
+      });
+      const data = await res.json();
+      setCart(data);
+    } catch (error) {
+      console.error("Erreur chargement panier :", error);
+    }
+  };
+
   useEffect(() => {
     if (!user) {
       const localCart = getLocalCart();
@@ -16,18 +28,6 @@ export default function Cart() {
       setCart({ cards: localCart, price: total });
       return;
     }
-
-    const fetchCart = async () => {
-      try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/card`, {
-          credentials: "include",
-        });
-        const data = await res.json();
-        setCart(data);
-      } catch (error) {
-        console.error("Erreur chargement panier :", error);
-      }
-    };
 
     fetchCart();
   }, [user]);
@@ -43,17 +43,17 @@ export default function Cart() {
     } else {
       // API
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/card/${productId}`, {
-          method: "PUT",
+        console.log(productId);
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/card/update/${productId}`, {
+          method: "PATCH",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ quantity: newQuantity }),
+          body: JSON.stringify({ quantity: newQuantity, formatId: formatId }),
         });
 
         if (!res.ok) throw new Error("Erreur mise à jour panier");
 
-        const updatedCartFromApi = await res.json();
-        setCart(updatedCartFromApi);
+        await fetchCart();
       } catch (error) {
         console.error(error);
       }
@@ -69,8 +69,8 @@ export default function Cart() {
     } else {
       // API (mettre quantité à 0 pour supprimer)
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/card/${productId}`, {
-          method: "PUT",
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/card/delete/${productId}`, {
+          method: "DELETE",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ quantity: 0 }),
@@ -78,8 +78,8 @@ export default function Cart() {
 
         if (!res.ok) throw new Error("Erreur suppression panier");
 
-        const updatedCartFromApi = await res.json();
-        setCart(updatedCartFromApi);
+        await fetchCart();
+
       } catch (error) {
         console.error(error);
       }
