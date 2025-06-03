@@ -3,7 +3,7 @@ import ToggleSwitch from './utils/ToggleSwitch';
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024
 
-const BackOfficeForm = ({ initialData = {}, fields, onClose, onSave, title }) => {
+const BackOfficeForm = ({ initialData = {}, fields, onClose, onSave, title, children }) => {
     const [formData, setFormData] = useState({});
     const [errors, setErrors] = useState({});
 
@@ -117,6 +117,8 @@ const BackOfficeForm = ({ initialData = {}, fields, onClose, onSave, title }) =>
                         )}
                     </label>
                 ))}
+
+                {children}
 
                 <div className="flex justify-end space-x-3">
                     <button
