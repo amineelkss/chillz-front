@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./Logout.css";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
 const Logout = ({ onClose }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { logout } = useAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = async () => {
         setLoading(true);
@@ -25,6 +27,7 @@ const Logout = ({ onClose }) => {
             } else {
                 logout(); // nettoyage local via le contexte
                 onClose(); // fermer la popup
+                navigate("/");
             }
         } catch (error) {
             setError({general: "Erreur réseau, veuillez réessayer."});
