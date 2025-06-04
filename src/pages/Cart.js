@@ -43,7 +43,6 @@ export default function Cart() {
     } else {
       // API
       try {
-        console.log(productId);
         const res = await fetch(`${process.env.REACT_APP_API_URL}/card/update/${productId}`, {
           method: "PATCH",
           credentials: "include",

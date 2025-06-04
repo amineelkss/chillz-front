@@ -4,21 +4,17 @@ import ToggleSwitch from './utils/ToggleSwitch';
 const MAX_FILE_SIZE = 10 * 1024 * 1024
 
 const BackOfficeForm = ({ initialData = {}, fields, onClose, onSave, title, children }) => {
-    const [formData, setFormData] = useState({});
     const [errors, setErrors] = useState({});
 
-    useEffect(() => {
-        const initial = { ...initialData }; // Inclut id et autres champs
-
-        // Ajout d'une valeur par défaut pour les toggles manquants
+    const [formData, setFormData] = useState(() => {
+        const initial = { ...initialData };
         fields.forEach(({ name, type }) => {
             if (initial[name] === undefined && type === 'toggle') {
                 initial[name] = false;
             }
         });
-
-        setFormData(initial);
-    }, [initialData, fields]);
+        return initial;
+    });
 
     const handleChange = (e, name) => {
         if (e.target.type === 'file') {
@@ -45,7 +41,12 @@ const BackOfficeForm = ({ initialData = {}, fields, onClose, onSave, title, chil
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const result = await onSave(formData);
+        const dataToSend = {
+            ...initialData,
+            ...formData,
+        };
+
+        const result = await onSave(dataToSend);
         if (result) {
             setErrors(result);
         } else {

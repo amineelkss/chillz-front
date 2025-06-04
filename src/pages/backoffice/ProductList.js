@@ -100,7 +100,7 @@ const ProductList = () => {
                 <div className="flex justify-between items-center mb-6">
                     <h1 className="text-3xl font-bold">Gestion des produits</h1>
                     <button
-                        onClick={() => setEditingProduct({})}
+                        onClick={() => setEditingProduct({formats: []})}
                         className="bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700"
                     >
                         + Créer un produit
