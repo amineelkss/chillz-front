@@ -110,6 +110,7 @@ const ProductForm = ({ product, onClose, onSave }) => {
                     </div>
                 ))}
                 <button
+                    type="button"
                     onClick={addFormat}
                     className="bg-green-600 text-white px-3 py-1 mt-2 rounded hover:bg-green-700"
                 >
