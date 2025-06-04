@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import BackOfficeForm from '../../components/BackOfficeForm';
 
 const ProductForm = ({ product, onClose, onSave }) => {
-    const [formats, setFormats] = useState(product.formats?.length ? product.formats : [{ title: '', quantity: 1, price: 0.01 }]);
+    const isCreating = !product?.id;
+
+    const [formats, setFormats] = useState(() => {
+        if (isCreating) {
+            return [{ title: '', quantity: 1, price: 0.01 }];
+        }
+        return product.formats?.length > 0 ? product.formats : [{ title: '', quantity: 1, price: 0.01 }];
+    });
 
     useEffect(() => {
-        if (product?.formats?.length) {
-            setFormats(product.formats);
-        } else {
-            setFormats([{ title: '', quantity: 1, price: 0.01 }]);
+        if (!isCreating && product?.formats) {
+            setFormats(product.formats.length > 0 ? product.formats : [{ title: '', quantity: 1, price: 0.01 }]);
         }
-    }, [product]);
+    }, [product, isCreating]);
 
     const addFormat = () => {
         setFormats([...formats, { title: '', quantity: 1, price: 0.01 }]);
@@ -28,9 +33,16 @@ const ProductForm = ({ product, onClose, onSave }) => {
     };
 
     const handleSave = async (formData) => {
-        formData.formats = formats;
-        return onSave(formData);
+        const dataToSave = {
+            ...formData,
+            formats: formats
+        };
+        return onSave(dataToSave);
     };
+
+    const initialData = isCreating ?
+        { formats: formats } :
+        { ...product, formats: formats };
 
     const fields = [
         { label: 'Titre', name: 'title', type: 'text'},
@@ -38,7 +50,7 @@ const ProductForm = ({ product, onClose, onSave }) => {
         { label: 'Quantité', name: 'quantity', type: 'number', min: '1' },
         { label: 'Ingrédients', name: 'ingredients', type: 'textarea'},
         { label: 'Catégorie', name: 'category', type: 'select', options: ['Afrique', 'Asie', 'Amérique du Sud', 'Australie','Europe']},
-        { label: 'Image', name: 'picture', type: 'file', required: true },
+        { label: 'Image', name: 'picture', type: 'file'},
         { label: 'Allergènes', name: 'allergens', type: 'textarea' },
         { label: 'Energie', name: 'energy', type: 'number', step: '0.01', min: '0' },
         { label: 'Glucides', name: 'carbohydrates', type: 'number', step: '0.01', min: '0' },
@@ -53,7 +65,7 @@ const ProductForm = ({ product, onClose, onSave }) => {
 
     return (
         <BackOfficeForm
-                initialData={product || {}}
+                initialData={initialData || {}}
                 fields={fields}
                 onSave={handleSave}
                 onClose={onClose}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import cannettePNG from "../assets/canette.png";
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
@@ -48,7 +47,7 @@ export default function Shop() {
               className="flex-1 flex items-center justify-center overflow-hidden"
             >
               <img
-                src={cannettePNG}
+                src={`${process.env.REACT_APP_API_URL}${product.picture}`}
                 alt={product.title}
                 className="h-full w-full object-contain block" // ✅ Ajout de "w-full" et "block"
               />
