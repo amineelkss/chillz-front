@@ -69,8 +69,10 @@ export const CanDetailsSection = () => (
           <p className="text-gray-600">Des études ont montré que le bissap peut aider à faire baisser l’hypertension, grâce à ses effets relaxants sur les vaisseaux sanguins.</p>
         </div>
         <div>
-          <h3 className="font-semibold text-lg mb-2">Lorem ipsum</h3>
-          <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+          <h3 className="font-semibold text-lg mb-2">Renforce le système immunitaire</h3>
+          <p className="text-gray-600">Le bissap est riche en vitamine C et en minéraux essentiels, aidant ainsi l’organisme à se défendre naturellement contre les infections.
+
+          </p>
         </div>
       </div>
     </div>
@@ -85,7 +87,7 @@ export const SubscriptionBanner = () => (
     >
       <div className="text-center">
         <h2 className="text-2xl md:text-3xl font-semibold mb-6">
-          Abonnez-vous pour bénéficier d'une remise de 20 %
+          Abonnez-vous pour bénéficier d'une remise de 10 %
         </h2>
         <form className="flex justify-center items-center bg-white rounded-full p-1 w-full max-w-xl mx-auto overflow-x-auto whitespace-nowrap">
           <input

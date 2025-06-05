@@ -39,7 +39,7 @@ export default function Footer() {
               s’abonner
             </button>
           </div>
-          <p className="text-sm mb-3">chillz@adressemail.com</p>
+          <p className="text-sm mb-3">infochillz.drink@gmail.com</p>
           <div className="flex justify-center md:justify-start gap-4 text-2xl">
             <a
               href="https://www.instagram.com/chillz.drink?igsh=MWxoOWZ6Mzg2MHNxNg%3D%3D&utm_source=qr"
