@@ -9,8 +9,6 @@ export default function Cart() {
   const isCartEmpty = cart.cards.length === 0;
   const navigate = useNavigate();
 
-  console.log('USER', user);
-
   const fetchCart = async () => {
     try {
       const res = await fetch(`${process.env.REACT_APP_API_URL}/card`, {
