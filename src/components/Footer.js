@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#e5366a] text-white pt-8 font-sans w-full">
+    <footer className="bg-[#e5366a] text-white pt-8 font-sans w-full mt-auto">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row flex-wrap justify-between gap-8 text-center md:text-left">
         {/* Colonne Communication */}
         <div className="w-full md:w-auto">

@@ -29,34 +29,41 @@ import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
-      <AuthProvider>
-          <Router>
-              <Navbar />
-              <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/shop" element={<Shop />} />
-                  <Route path="/cart" element={<Cart />} />
-                  <Route path="/checkout" element={<CheckoutSteps />} />
-                  <Route path="/magasin" element={<Magasin />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-                  <Route path="/logout"  element={<Logout />} />
-                  <Route path="/product/:id" element={<Product />} />
-                  <Route path="/register" element={<PublicRoute><Register /></PublicRoute> } />
-                  <Route path="/backoffice" element={<ProtectedRoute/>} >
-                    <Route index element={<BackofficeHome />} />
-                    <Route path="products" element={<Products />} />
-                  </Route>
-                  <Route path="/client" element={<ClientPage /> } />
-                  <Route path="/conditionsutilisation" element={<ConditionsUtilisation /> } />
-                  <Route path="/mentionslegales" element={<MentionsLegales /> } />
-                  <Route path="/cookies" element={<Cookies /> } />
-                  <Route path="/about" element={<AboutPage /> } />
-              </Routes>
-              <Footer />
-          </Router>
-      </AuthProvider>
+    <AuthProvider>
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          
+          <div className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<CheckoutSteps />} />
+              <Route path="/magasin" element={<Magasin />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+              <Route path="/logout"  element={<Logout />} />
+              <Route path="/product/:id" element={<Product />} />
+              <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+              <Route path="/backoffice" element={<ProtectedRoute />}>
+                <Route index element={<BackofficeHome />} />
+                <Route path="products" element={<Products />} />
+              </Route>
+              <Route path="/client" element={<ClientPage />} />
+              <Route path="/conditionsutilisation" element={<ConditionsUtilisation />} />
+              <Route path="/mentionslegales" element={<MentionsLegales />} />
+              <Route path="/cookies" element={<Cookies />} />
+              <Route path="/about" element={<AboutPage />} />
+            </Routes>
+          </div>
+
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
+
 
 export default App;
