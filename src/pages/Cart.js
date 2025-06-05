@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { getLocalCart, updateLocalCartQuantity, removeFromLocalCart, calculateLocalCartTotal } from "../components/utils/localCard";
+import { useNavigate } from 'react-router-dom';
 
 export default function Cart() {
   const { user } = useAuth();
   const [cart, setCart] = useState({ cards: [], price: 0 });
+  const isCartEmpty = cart.cards.length === 0;
+  const navigate = useNavigate();
 
   const fetchCart = async () => {
     try {
@@ -57,6 +60,10 @@ export default function Cart() {
         console.error(error);
       }
     }
+  };
+
+  const handleContinue = () => {
+    navigate("/checkout");
   };
 
   const removeItem = async (productId, formatId) => {
@@ -137,11 +144,16 @@ export default function Cart() {
           <span className="text-rose-800">{cart.price.toFixed(2)}€</span>
         </div>
 
-        <div className="flex justify-end mt-6">
-          <button className="bg-gradient-to-r from-rose-500 to-red-800 text-white px-8 py-3 rounded-full shadow-md hover:opacity-90">
-            Continuer
-          </button>
-        </div>
+        {!isCartEmpty && (
+            <div className="flex justify-end mt-6">
+              <button
+                  className="bg-gradient-to-r from-rose-500 to-red-800 text-white px-8 py-3 rounded-full shadow-md hover:opacity-90"
+                  onClick={handleContinue}
+              >
+                Continuer
+              </button>
+            </div>
+        )}
       </div>
     </div>
   );

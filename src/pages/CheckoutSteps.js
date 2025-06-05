@@ -1,47 +1,105 @@
 import React, { useState } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import bissapCanImage from "../assets/cartImageCanBissap.png";
+import { useAuth } from "../contexts/AuthContext";
+import AddressSelector from "../components/utils/AddressSelector";
 
 export default function CheckoutSteps() {
   const [step, setStep] = useState(2);
+  const { user } = useAuth();
 
-  const nextStep = () => setStep((prev) => prev + 1);
-  const prevStep = () => setStep((prev) => prev - 1);
+  const [formValues, setFormValues] = useState({
+    firstname: '',
+    lastname: '',
+    phone: '',
+    address_title: '',
+    address_content: ''
+  });
+
+  // Quand l'adresse change dans AddressSelector, mettre à jour formValues
+  const handleAddressChange = (address) => {
+    setFormValues(prev => ({
+      ...prev,
+      address_title: address.address_title,
+      address_content: address.address_content,
+    }));
+  };
+
+  const nextStep = () => setStep(prev => prev + 1);
+  const prevStep = () => setStep(prev => prev - 1);
 
   return (
-    <div className="p-6 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div className="lg:col-span-2">
-        <nav className="text-sm text-gray-500 mb-4">
-          <span className={step === 2 ? 'text-pink-600 font-semibold' : ''}>Détails</span> {'>'} {' '}
-          <span className={step === 3 ? 'text-pink-600 font-semibold' : ''}>Livraison</span> {'>'} {' '}
-          <span className={step === 4 ? 'text-pink-600 font-semibold' : ''}>Paiement</span> {'>'} {' '}
-          <span className={step === 5 ? 'text-pink-600 font-semibold' : ''}>Confirmation</span>
-        </nav>
+      <div className="p-6 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2">
+          <nav className="text-sm text-gray-500 mb-4">
+            <span className={step === 2 ? 'text-pink-600 font-semibold' : ''}>Détails</span> {'>'} {' '}
+            <span className={step === 3 ? 'text-pink-600 font-semibold' : ''}>Livraison</span> {'>'} {' '}
+            <span className={step === 4 ? 'text-pink-600 font-semibold' : ''}>Paiement</span> {'>'} {' '}
+            <span className={step === 5 ? 'text-pink-600 font-semibold' : ''}>Confirmation</span>
+          </nav>
 
-        {step === 2 && (
-          <div>
-            <h2 className="text-lg font-semibold mb-4">Adresse de livraison</h2>
-            <form className="space-y-3">
-              <div className="flex gap-2">
-                <input type="text" placeholder="Prénom" className="border rounded px-3 py-2 w-full" />
-                <input type="text" placeholder="Nom" className="border rounded px-3 py-2 w-full" />
-              </div>
-              <input type="text" placeholder="Adresse" className="border rounded px-3 py-2 w-full" />
-              <input type="text" placeholder="Numéros de téléphone" className="border rounded px-3 py-2 w-full" />
-              <div className="flex gap-2">
-                <select className="border rounded px-3 py-2 w-full">
-                  <option>France</option>
-                </select>
-                <input type="text" placeholder="Ville" className="border rounded px-3 py-2 w-full" />
-                <input type="text" placeholder="Code postal" className="border rounded px-3 py-2 w-full" />
-              </div>
-              <label className="flex items-center gap-2">
-                <input type="checkbox" />
-                Sauvegarder les informations
-              </label>
-            </form>
-            <button onClick={prevStep} className="text-sky-500 mt-4">Retour</button>
-            <button onClick={nextStep} className="ml-4 bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-2 rounded-full shadow">Continuer</button>
+          {step === 2 && (
+              <div>
+                <h2 className="text-lg font-semibold mb-4">Adresse de livraison</h2>
+                {user ? (
+                    <div className="space-y-3">
+                    <div className="flex gap-2">
+                        <input
+                            type="text"
+                            placeholder="Prénom"
+                            value={formValues.firstname || ''}
+                            onChange={(e) => setFormValues({ ...formValues, firstname: e.target.value })}
+                            className="border rounded px-3 py-2 w-full"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Nom"
+                            value={formValues.lastname || ''}
+                            onChange={(e) => setFormValues({ ...formValues, lastname: e.target.value })}
+                            className="border rounded px-3 py-2 w-full"
+                        />
+                      </div>
+
+                      {user.addresses && user.addresses.length > 0 ? (
+                          <AddressSelector
+                              addresses={user.addresses}
+                              onAddressChange={handleAddressChange}
+                          />
+                      ) : (
+                          <input
+                              type="text"
+                              placeholder="Adresse"
+                              value={formValues.address_content || ''}
+                              onChange={(e) =>
+                                  setFormValues({ ...formValues, address_content: e.target.value })
+                              }
+                              className="border rounded px-3 py-2 w-full"
+                          />
+                      )}
+                      
+                      <input
+                          type="text"
+                          placeholder="Numéro de téléphone"
+                          value={formValues.phone || ''}
+                          onChange={(e) => setFormValues({ ...formValues, phone: e.target.value })}
+                          className="border rounded px-3 py-2 w-full"
+                      />
+                    </div>
+                ) : (
+                      <div className="space-y-3">
+                        <div className="flex gap-2">
+                          <input type="text" placeholder="Prénom" className="border rounded px-3 py-2 w-full" />
+                          <input type="text" placeholder="Nom" className="border rounded px-3 py-2 w-full" />
+                        </div>
+                        <input type="text" placeholder="Adresse" className="border rounded px-3 py-2 w-full" />
+                        <input type="text" placeholder="Numéro de téléphone" className="border rounded px-3 py-2 w-full" />
+                        <label className="flex items-center gap-2">
+                          <input type="checkbox" /> Sauvegarder les informations
+                        </label>
+                      </div>
+                )}
+                <button onClick={nextStep} className="ml-4 bg-gradient-to-r from-pink-600 to-pink-700 text-white px-6 py-2 rounded-full shadow">Continuer
+                </button>
           </div>
         )}
 
